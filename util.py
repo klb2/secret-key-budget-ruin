@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def db_to_linear(value):
-    return 10**(value/10.)
+    return 10**(np.array(value)/10.)
 
 def linear_to_db(value):
     return 10*np.log10(value)
