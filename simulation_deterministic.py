@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 
 from ide_stopping_time import ide_fft
 from mc_stopping_time import mc_stopping_time
+from bounds_stopping_time import worst_case_outage_prob_iid
 
 from util import (export_results, find_closest_element_idx, db_to_linear,
                   capacity)
@@ -38,7 +39,7 @@ def main(save_b: Iterable[float] = [5., 10., 20.],
     LOGGER.info(f"Avg. SNR Eve: {snr_eve:.1f}dB")
     
     LOGGER.debug("Determining the density of the claims")
-    _num_samples_rv = int(1e5)
+    _num_samples_rv = int(2e5)
     samples_x = rv_bob.rvs(size=_num_samples_rv)
     samples_xt = rv_bob.rvs(size=_num_samples_rv)
     samples_y = rv_eve.rvs(size=_num_samples_rv)
@@ -47,8 +48,14 @@ def main(save_b: Iterable[float] = [5., 10., 20.],
     rate_eve = capacity(samples_y)
     rate_bob = capacity(samples_xt)
     samples_claims = -(rate_sum - rate_eve - rate_bob)
+    _mean_income = np.mean(rate_sum-rate_eve)
+    _mean_tx = np.mean(rate_bob)
+    LOGGER.debug(f"Average income: {_mean_income:.3f}")
+    LOGGER.debug(f"Average claim: {_mean_tx:.3f}")
 
-    LOGGER.debug(f"Average claim: {np.mean(samples_claims):.3f}bit")
+    mean_claim = np.mean(samples_claims)
+    var_claim = np.var(samples_claims)
+    LOGGER.debug(f"Average net claim: {mean_claim:.3f}bit")
     _hist = np.histogram(samples_claims, bins=300)
     rv = stats.rv_histogram(_hist)
     LOGGER.info("Performing Gaussian KDE...")
@@ -68,12 +75,20 @@ def main(save_b: Iterable[float] = [5., 10., 20.],
     if not skip_mc:
         LOGGER.info("Working on the Monte Carlo simulation...")
         budget_mc, cdf_mc = mc_stopping_time(rv, max_budget=max_budget,
-                                            num_samples=num_samples,
-                                            num_timesteps=num_timesteps)
+                                             num_samples=num_samples,
+                                             num_timesteps=num_timesteps)
     else:
         LOGGER.info("Skipping Monte Carlo simulation...")
         budget_mc = np.linspace(0, max_budget, num_budgets)
         cdf_mc = np.zeros((num_timesteps, num_budgets))
+
+
+    LOGGER.info("Working on bound...")
+    timeline = np.arange(num_timesteps)
+    upper_bound = worst_case_outage_prob_iid(mean_claim, var_claim,
+                                             budget=budget_mc,
+                                             n=np.reshape(timeline, (-1, 1)))
+
     LOGGER.info("Working on the numerical calculation...")
     budget_th, cdf_th = ide_fft(rv_kde.pdf, max_x=max_budget,
                                 num_timesteps=num_timesteps,
@@ -84,15 +99,17 @@ def main(save_b: Iterable[float] = [5., 10., 20.],
     for b in save_b:
         idx_b_mc = find_closest_element_idx(budget_mc, b)
         idx_b_th = find_closest_element_idx(budget_th, b)
-        timeline = np.arange(num_timesteps)
         _cdf_mc_b = np.ravel(cdf_mc[:, idx_b_mc])
         _cdf_th_b = np.ravel(cdf_th[:, idx_b_th])
-        LOGGER.debug(f"b0={b:.1f}, t=4 and 10: {_cdf_th_b[[5,11]]}")
+        _cdf_bound = np.ravel(upper_bound[:, idx_b_mc])
+        LOGGER.debug(f"b0={b:.1f}, t=1, t=4 and 10: {_cdf_th_b[[1,4,10]]}")
+        LOGGER.debug(f"Exact outage at t=1: {1-rv.cdf(b)}")
         if export:
             results = {
                        "time": timeline,
                        "mc": np.ravel(_cdf_mc_b),
                        "ide": np.ravel(_cdf_th_b),
+                       "upper": _cdf_bound,
                       }
             fname = f"ruin-cdf-time-b{b:.1f}.dat"
             export_results(results, fname)
@@ -100,6 +117,7 @@ def main(save_b: Iterable[float] = [5., 10., 20.],
             fig, axs = plt.subplots()
             axs.semilogy(timeline, _cdf_mc_b, label="Monte Carlo Simulation")
             axs.semilogy(timeline, _cdf_th_b, label="Numerical Solution")
+            axs.semilogy(timeline, _cdf_bound, label="Upper bound")
             axs.legend()
             axs.set_xlabel("Time Step $t$")
             axs.set_ylabel("Outage Probability $\\varepsilon$")
@@ -110,12 +128,24 @@ def main(save_b: Iterable[float] = [5., 10., 20.],
     if export:
         _components = (("mc", cdf_mc, budget_mc),
                        ("th", cdf_th, budget_th),
+                       ("upper", upper_bound, budget_mc),
                       )
         for _name, _cdf, _budget in _components:
             results = {f"t{t:d}": _cdf[t] for t in save_t}
             results["budget"] = _budget
             fname = f"ruin-cdf-budget-{_name}.dat"
             export_results(results, fname)
+    #if plot:
+    #    fig, axs = plt.subplots()
+    #    axs.semilogy(budget_mc, cdf_mc[3], label="Monte Carlo Simulation")
+    #    axs.semilogy(budget_th, cdf_th[3], label="Numerical Solution")
+    #    axs.semilogy(budget_mc, upper_bound[3], label="Upper bound")
+    #    axs.legend()
+    #    axs.set_xlabel("Initial Budget $b_{0}$")
+    #    axs.set_ylabel("Outage Probability $\\varepsilon$")
+    #    #axs.set_title(f"Start Budget $b_0={b:.1f}$")
+    #    #axs.set_xlim([0, num_timesteps])
+    #    #axs.set_ylim([1e-7, 1])
 
 
 if __name__ == "__main__":

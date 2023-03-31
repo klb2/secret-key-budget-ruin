@@ -6,7 +6,7 @@ from scipy import stats
 
 def estimate_stop_times_samples(start_budget: float, acc_claims: Iterable):
     surplus = start_budget - acc_claims
-    stop_times = np.argmax(surplus<=0, axis=1)
+    stop_times = np.argmax(surplus<0, axis=1)
     num_timesteps = np.shape(acc_claims)[1]
     stop_times[np.logical_and(stop_times == 0, start_budget>0)] = num_timesteps
     #stop_times = stop_times + 1
