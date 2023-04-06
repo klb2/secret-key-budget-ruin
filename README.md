@@ -1,12 +1,14 @@
-# Template for Reproducible Research Papers
+# Reliability and Latency Analysis for Wireless Communication Systems with a Secret-Key Budget
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/klb2/secret-key-budget-ruin/HEAD)
 ![GitHub](https://img.shields.io/github/license/klb2/secret-key-budget-ruin)
+[![arXiv](https://img.shields.io/badge/arXiv-2304.02538-informational)](https://arxiv.org/abs/2304.02538)
 
 
 This repository is accompanying the paper "Reliability and Latency Analysis for
 Wireless Communication Systems with a Secret-Key Budget" (Karl-L. Besser,
-Rafael Schaefer, and Vincent Poor, 2023. [arXiv:]()).
+Rafael Schaefer, and Vincent Poor, Apr. 2023.
+[arXiv:2304.02538](https://arxiv.org/abs/2304.02538)).
 
 The idea is to give an interactive version of the calculations and presented
 concepts to the reader. One can also change different parameters and explore
@@ -35,8 +37,9 @@ The following files are provided in this repository:
 
 ## Usage
 ### Running it online
-You can use services like [CodeOcean](https://codeocean.com) to run the scripts
-online.
+You can use services like [CodeOcean](https://codeocean.com) or
+[Binder](https://mybinder.org/v2/gh/klb2/secret-key-budget-ruin/HEAD) to run
+the scripts online.
 
 ### Local Installation
 If you want to run it locally on your machine, Python3 and Jupyter are needed.
@@ -75,12 +78,13 @@ article listed above.
 
 You can use the following BibTeX entry
 ```bibtex
-@article{Besser2023secretkeybudget,
+@misc{Besser2023secretkeybudget,
   author = {Besser, Karl-Ludwig and Schaefer, Rafael F. and Poor, H. Vincent},
   title = {Reliability and Latency Analysis for Wireless Communication Systems with a Secret-Key Budget},
   year = {2023},
+  month = {4},
+  eprint = {2304.02538},
+  archiveprefix = {arXiv},
+  primaryclass = {cs.IT},
 }
-```
-```diff
-! Add bibtex entry of the published paper
 ```
