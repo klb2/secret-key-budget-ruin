@@ -2,12 +2,15 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/klb2/secret-key-budget-ruin/HEAD)
 ![GitHub](https://img.shields.io/github/license/klb2/secret-key-budget-ruin)
+[![DOI](https://img.shields.io/badge/doi-10.1109/TCOMM.2023.3329211-informational)](https://doi.org/10.1109/TCOMM.2023.3329211)
 [![arXiv](https://img.shields.io/badge/arXiv-2304.02538-informational)](https://arxiv.org/abs/2304.02538)
 
 
 This repository is accompanying the paper "Reliability and Latency Analysis for
 Wireless Communication Systems with a Secret-Key Budget" (Karl-L. Besser,
-Rafael Schaefer, and Vincent Poor, Apr. 2023.
+Rafael Schaefer, and Vincent Poor, IEEE Transactions on Communications, Nov.
+2023.
+[doi:10.1109/TCOMM.2023.3329211](https://doi.org/10.1109/TCOMM.2023.3329211),
 [arXiv:2304.02538](https://arxiv.org/abs/2304.02538)).
 
 The idea is to give an interactive version of the calculations and presented
@@ -68,7 +71,7 @@ This research was supported by the German Research Foundation (DFG) under grant
 BE 8098/1-1, by the German Federal Ministry of Education and Research (BMBF)
 within the national initiative on 6G Communication Systems through the research
 hub 6G-life under Grant 16KISK001K, and by the U.S National Science Foundation
-under Grants CCF-1908308 and CNS-2128448.
+under Grants CNS-2128448 and ECCS-2335876.
 
 
 ## License and Referencing
@@ -78,13 +81,16 @@ article listed above.
 
 You can use the following BibTeX entry
 ```bibtex
-@misc{Besser2023secretkeybudget,
+@article{Besser2023secretkeybudget,
   author = {Besser, Karl-Ludwig and Schaefer, Rafael F. and Poor, H. Vincent},
   title = {Reliability and Latency Analysis for Wireless Communication Systems with a Secret-Key Budget},
+  journal = {IEEE Transactions on Communications},
   year = {2023},
-  month = {4},
+  month = {11},
+  pubstate = {Early Access},
   eprint = {2304.02538},
   archiveprefix = {arXiv},
   primaryclass = {cs.IT},
+  doi = {10.1109/TCOMM.2023.3329211},
 }
 ```
