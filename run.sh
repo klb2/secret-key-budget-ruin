@@ -2,9 +2,10 @@
 
 # Run all script to generate the results presented in the paper "Reliability
 # and Latency Analysis for Wireless Communication Systems with a Secret-Key
-# Budget" (Karl-L. Besser, Rafael Schaefer, and Vincent Poor, Apr 2023).
+# Budget" (Karl-L. Besser, Rafael Schaefer, and Vincent Poor, IEEE Transactions
+# on Communications, vol. 72, no. 2, pp. 1033-1044, Feb 2024).
 #
-# Copyright (C) 2023 Karl-Ludwig Besser
+# Copyright (C) 2023-2024 Karl-Ludwig Besser
 # License: GPLv3
 
 echo "Figure 1: Illustration of temporal progress"

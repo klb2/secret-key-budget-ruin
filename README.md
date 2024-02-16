@@ -8,8 +8,8 @@
 
 This repository is accompanying the paper "Reliability and Latency Analysis for
 Wireless Communication Systems with a Secret-Key Budget" (Karl-L. Besser,
-Rafael Schaefer, and Vincent Poor, IEEE Transactions on Communications, Nov.
-2023.
+Rafael Schaefer, and Vincent Poor, IEEE Transactions on Communications, vol.
+72, no. 2, pp. 1033-1044, Feb. 2024.
 [doi:10.1109/TCOMM.2023.3329211](https://doi.org/10.1109/TCOMM.2023.3329211),
 [arXiv:2304.02538](https://arxiv.org/abs/2304.02538)).
 
@@ -85,9 +85,11 @@ You can use the following BibTeX entry
   author = {Besser, Karl-Ludwig and Schaefer, Rafael F. and Poor, H. Vincent},
   title = {Reliability and Latency Analysis for Wireless Communication Systems with a Secret-Key Budget},
   journal = {IEEE Transactions on Communications},
-  year = {2023},
-  month = {11},
-  pubstate = {Early Access},
+  year = {2024},
+  month = {2},
+  volume = {72},
+  number = {2},
+  pages = {1033--1044},
   eprint = {2304.02538},
   archiveprefix = {arXiv},
   primaryclass = {cs.IT},
