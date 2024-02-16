@@ -81,7 +81,7 @@ article listed above.
 
 You can use the following BibTeX entry
 ```bibtex
-@article{Besser2023secretkeybudget,
+@article{Besser2024secretkeybudget,
   author = {Besser, Karl-Ludwig and Schaefer, Rafael F. and Poor, H. Vincent},
   title = {Reliability and Latency Analysis for Wireless Communication Systems with a Secret-Key Budget},
   journal = {IEEE Transactions on Communications},
