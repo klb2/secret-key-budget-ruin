@@ -6,12 +6,15 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2304.02538-informational)](https://arxiv.org/abs/2304.02538)
 
 
-This repository is accompanying the paper "Reliability and Latency Analysis for
-Wireless Communication Systems with a Secret-Key Budget" (Karl-L. Besser,
+This repository is accompanying the papers "Reliability and Latency Analysis
+for Wireless Communication Systems with a Secret-Key Budget" (Karl-L. Besser,
 Rafael Schaefer, and Vincent Poor, IEEE Transactions on Communications, vol.
 72, no. 2, pp. 1033-1044, Feb. 2024.
 [doi:10.1109/TCOMM.2023.3329211](https://doi.org/10.1109/TCOMM.2023.3329211),
-[arXiv:2304.02538](https://arxiv.org/abs/2304.02538)).
+[arXiv:2304.02538](https://arxiv.org/abs/2304.02538)) and "Reliability and
+Latency of Wireless Communication Systems with a Secret-Key Budget" (Karl-L.
+Besser, Rafael Schaefer, and Vincent Poor, IEEE ICC, Jun. 2024.
+[doi:10.1109/ICC51166.2024.10622417](https://doi.org/10.1109/ICC51166.2024.10622417)).
 
 The idea is to give an interactive version of the calculations and presented
 concepts to the reader. One can also change different parameters and explore
